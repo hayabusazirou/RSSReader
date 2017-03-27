@@ -16,21 +16,23 @@
         <TextBox Grid.Row="0" Name="Value" Margin="20" VerticalAlignment="Center" 
                  KeyDown="Go_KeyDown"/>
 
-        <ScrollViewer Grid.Row="1" Margin="20" BorderThickness="0">
+        <ListView Grid.Row="1" Margin="20" BorderThickness="0">
             <ItemsControl Name="Display">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
+                        <StackPanel Margin="2" Background="#FF434343">
+                            <TextBlock TextWrapping="Wrap" Text="{Binding Path=Title.Text}" Foreground="Green" FontSize="14"/>
+                            <TextBlock TextWrapping="Wrap" Text="{Binding Path=Summary.Text}" Foreground="Yellow"/>
                             <HyperlinkButton NavigateUri="{Binding Path=Links[0].Uri}">
                                 <HyperlinkButton.Content>
-                                    <TextBlock TextWrapping="Wrap" Text="{Binding Path=Title.Text}"/>
+                                    <TextBlock TextWrapping="Wrap" Text="{Binding Path=Links[0].Uri}"/>
                                 </HyperlinkButton.Content>
                             </HyperlinkButton>
                         </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-        </ScrollViewer>
+        </ListView>
         
     </Grid>
 </Page>
