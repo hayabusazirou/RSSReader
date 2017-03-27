@@ -17,9 +17,13 @@ namespace RSSReader
         {
             SyndicationClient client = new SyndicationClient();
             SyndicationFeed feed = await client.RetrieveFeedAsync(uri);
+                        
             if (feed != null)
             {
-                foreach(SyndicationItem item in feed.Items)
+                //listの中を削除する
+                list.Items.Clear();
+
+                foreach (SyndicationItem item in feed.Items)
                 {
                     list.Items.Add(item);
                 }
