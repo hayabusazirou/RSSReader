@@ -26,5 +26,12 @@ namespace RSSReader
         {
             this.InitializeComponent();
         }
+
+        public Library Library = new Library();
+
+        private void Go_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            Library.Go(ref Display, Value.Text, e);
+        }
     }
 }
