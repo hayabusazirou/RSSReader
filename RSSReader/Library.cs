@@ -8,6 +8,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.Web.Syndication;
+using Windows.UI.Popups;
 
 namespace RSSReader
 {
@@ -16,7 +17,15 @@ namespace RSSReader
         private async void load(ItemsControl list, Uri uri)
         {
             SyndicationClient client = new SyndicationClient();
-            SyndicationFeed feed = await client.RetrieveFeedAsync(uri);
+            SyndicationFeed feed = null;
+            try
+            {
+                feed = await client.RetrieveFeedAsync(uri);
+            }
+            catch
+            {
+                ShowDialog("", MessageStrings.ExceptionMessages.NoFeed);
+            }
                         
             if (feed != null)
             {
@@ -40,10 +49,15 @@ namespace RSSReader
                 }
                 catch
                 {
-
+                    ShowDialog("", MessageStrings.ExceptionMessages.NotUri);
                 }
                 list.Focus(FocusState.Keyboard);
             }
+        }
+
+        private async void ShowDialog(string title, string message)
+        {
+            await new MessageDialog(title, message).ShowAsync();
         }
     }
 }
